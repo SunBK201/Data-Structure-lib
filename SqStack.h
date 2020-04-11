@@ -1,63 +1,50 @@
-#define MaxSize 50
+#include <cstdlib>
+#define MaxSize 100
+#define ElemType int
 
 using namespace std;
 
-typedef struct{
-	BiTNode *data[MaxSize];
-	int top;
-}SqStack;
-
-void InitStack(SqStack &S)
+typedef struct
 {
-	S.top = -1;
+    ElemType data[MaxSize];
+    int top;
+} SqStack;
+
+bool SqStack_InitStack(SqStack &S)
+{
+    S.top = -1;
 }
 
-bool StackEmpty(SqStack S)
+bool SqStack_IsEmpty(SqStack S)
 {
-	if(S.top == -1)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (S.top == -1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-bool Push(SqStack &S, BiTNode *x)
+bool SqStack_Push(SqStack &S, ElemType e)
 {
-	if(S.top == MaxSize - 1)
-	{
-		return false;
-	}
-	S.data[++S.top] = x;
-	return true;
+    if (S.top >= MaxSize - 1)
+    {
+        cout << "Stack is full!" << endl;
+        return false;
+    }
+    S.data[++S.top] = e;
+    return true;
 }
 
-bool Pop(SqStack &S, BiTNode *&x)
+bool SqStack_Pop(SqStack &S, ElemType &e)
 {
-	if(S.top == -1)
-	{
-		return false;
-	}
-	x = S.data[S.top];
-	S.top--;
-	return true;
+    if (S.top == -1)
+    {
+        cout << "Stack is null!" << endl;
+        return false;
+    }
+    e = S.data[S.top--];
+    return true;
 }
-
-bool GetTop(SqStack &S, BiTNode *&x)
-{
-	if(S.top == -1)
-	{
-		return false;
-	}
-	x = S.data[S.top];
-	return true;
-}
-
-
-
-
-
-
-
